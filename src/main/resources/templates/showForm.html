@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Add Ticket Form</title>
+    <style>
+        h1 {
+            color: royalblue;
+            margin-bottom: 20px; /* Added margin to separate from form */
+        }
+
+        .form-container {
+            margin-top: 20px; /* Added margin to separate from h1 */
+            padding: 10px; /* Reduced padding */
+        }
+        td{
+			font-weight: bold;
+		}
+        table {
+            border: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Ticket</h1>
+    <form action="#" th:action="@{/addTicket}" th:object="${ticket}" method="post" class="form-container border border-info rounded">
+        <input type="hidden" class="form-control" th:field="*{id}" /> <!-- //to update -->
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td><label for="title">Title:</label></td>
+                <td><input type="text" th:field="*{title}" id="title" class="form-control" /></td> <!-- Added form-control class -->
+            </tr>
+            <tr>
+                <td><label for="description">Description:</label></td>
+                <td><input type="text" th:field="*{description}" id="description" class="form-control" /></td> <!-- Added form-control class -->
+            </tr>
+            <tr>
+                <td><label for="status">Status:</label></td>
+                <td><input type="text" th:field="*{status}" id="status" class="form-control" /></td> <!-- Added form-control class -->
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+    </form>
+    <br>
+    <a th:href="@{/home}" class="btn btn-success btn-sm">BACK</a>
+</body>
+</html>

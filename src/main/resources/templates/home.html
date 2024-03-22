@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Ticket Application</title>
+    <style>
+		li{
+			display: inline;
+		}
+		li a{
+			display: inline-flex;
+			padding: 2px;
+			color: white;
+		    size: 10px;
+		    font-size:140%;
+		}
+		
+		ul{
+			
+			list-style-type: none;
+              margin: 0;
+              padding: 2%;
+             overflow: hidden;
+               background-color:teal;
+		}
+		
+		h1{
+			color:steelblue;
+		}
+		table {
+    border: 1px solid;
+          }
+  
+          li a:hover {
+   background-color: aqua;
+            }
+            p{
+				text-align: center;
+				padding-bottom: 2%;
+				text-shadow: 3px;
+				font-style: italic;
+				border-inline-start-color: aqua;
+				color:teal;
+			}
+
+  
+
+	</style>
+</head>
+<body>
+	
+	 <ul>
+		<li><a href="#">Ticket Tracker Application</a></li>
+		<li><a href="#">Tickets</a></li>
+		<li><a th:href="@{/showForm}">New Ticket</a></li>
+	
+	</ul>
+	<br>
+    <h1>List Of Ticket</h1>
+    <!-- Search bar -->
+    <form th:action="@{/search}" method="get" >
+        <input type="text" name="searchTitle" placeholder="Search by title" class="border border-info rounded p-2">
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+
+    <table class="table table-bordered table-striped">
+		
+		 <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+         </thead>
+        <tr th:each="ticket : ${ticketList}">
+            <td th:text="${ticket.id}"></td>
+            <td th:text="${ticket.title}"></td>
+            <td th:text="${ticket.description}"></td>
+            <td th:text="${ticket.status}"></td>
+            <td><a th:href="@{'/del/'+${ticket.id}}" class="btn btn-danger btn-sm">Delete</a>
+            <a th:href="@{'/edit/'+${ticket.id}}" class="btn btn-primary btn-sm">Edit</a>
+            <a th:href="@{/viewTicket(id=${ticket.id})}" class="btn btn-info btn-sm">View</a>
+      
+
+ 
+            </td>
+        </tr>
+    </table>
+    <div>
+		
+    <form th:action="@{/home/sort}" method="get">
+        <input type="hidden" name="title" value="title">
+        <button type="submit" name="order" value="asc" class="btn btn-primary">Sort Ascending</button>
+        <button type="submit" name="order" value="desc" class="btn btn-primary">Sort Descending</button>
+    </form>
+</div>
+  <br> 
+	<footer><p>MADE BY MANAS MISHRA</p></footer>
+	
+   
+
+</body>
+</html>
